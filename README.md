@@ -12,5 +12,12 @@ For particle purpose, in that code example the same above behaviour can be obtai
 
 ------------------------------------------------------------------------------------------------------------------------------------------
 
-First EndPoint:-
--[x]
+First EndPoint (School Service):-
+- [x] http://ipaddress:portno/jax-rs-circuitbreaker/api/school/detail/{schoolname}/{portno}
+Here schoolname and portno are PathParam. (http://ipaddress:portno/jax-rs-circuitbreaker/api/school/detail/kiit/9090)
+
+Second EndPoint (Student Service):-
+- [x] http://ipaddress:portno/jax-rs-circuitbreaker/api/student/detail/{schoolname}
+Here schoolname is the pathparam which will be set from the first end point request using JerseyAsyncClient api for the second end point request. Similary the port number will be set in the same way. 
+("http://ipaddress:"+portno+"/jax-rs-circuitbreaker/api/student/detail/"+schoolname)
+
