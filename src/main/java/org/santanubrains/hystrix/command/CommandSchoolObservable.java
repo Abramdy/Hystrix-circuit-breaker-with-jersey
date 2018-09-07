@@ -25,7 +25,12 @@ public class CommandSchoolObservable extends HystrixObservableCommand<Response> 
 	private final Long portNo;
 
 	public CommandSchoolObservable(JerseyAsyncClient jerseyAsyncClient, Gson gson, String schoolName, Long portNo) {
-		super(Setter.withGroupKey(HystrixCommandGroupKey.Factory.asKey(CommandSchoolObservable.class.getName())));
+		super(Setter.withGroupKey(HystrixCommandGroupKey.Factory.asKey(CommandSchoolObservable.class.getName()))
+				.andCommandPropertiesDefaults(
+						HystrixCommandProperties.Setter()
+						.withCircuitBreakerErrorThresholdPercentage(50)
+						.withCircuitBreakerRequestVolumeThreshold(5)
+						.withCircuitBreakerSleepWindowInMilliseconds(60000)));
 		this.jerseyAsyncClient = jerseyAsyncClient;
 		this.gson = gson;
 		this.schoolName = schoolName;
